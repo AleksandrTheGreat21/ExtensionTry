@@ -3,8 +3,15 @@
   "description": "Papus",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
   "action": {
     "default_popup": "index.html",
     "default_icon": "papus-the-great.png"
+  "background": {
+    "service_worker": "background.js"
+  }
   }
 }

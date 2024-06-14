@@ -3,22 +3,31 @@ document.addEventListener('DOMContentLoaded', function () {
   colorButton.addEventListener('click', changeColor);
 });
 
-
 function changeColor() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.scripting.executeScript({
-      target: { tabId: tabs[0].id },
-      function: changeBackgroundColor,
+  if (chrome.tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      if (chrome.scripting) {
+        chrome.scripting.executeScript({
+          target: { tabId: tabs[0].id },
+          func: changeBackgroundColor,
+        }, function () {
+          if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError.message);
+          }
+        });
+      } else {
+        console.error('chrome.scripting is undefined');
+      }
     });
-  });
+  } else {
+    console.error('chrome.tabs is undefined');
+  }
 }
-
 
 function changeBackgroundColor() {
   if (document.body.style.backgroundColor === 'red') {
     document.body.style.backgroundColor = 'unset';
-  }
-  else {
+  } else {
     document.body.style.backgroundColor = 'red';
   }
 }

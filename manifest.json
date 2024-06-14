@@ -8,7 +8,7 @@
     "scripting"
   ]
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "popup.html",
     "default_icon": "papus-the-great.png"
   "background": {
     "service_worker": "background.js"
